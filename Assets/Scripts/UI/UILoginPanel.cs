@@ -35,14 +35,12 @@ namespace LoginSystem.UI
             onLogin();
         }
         
-        IAuthService _authService;
-        IUserService _userService;
+        LoginWork _loginWork;
         
         [Inject]
-        public void Construct(IAuthService authService, IUserService userService)
+        public void Construct(LoginWork loginWork)
         {
-            _authService = authService;
-            _userService = userService;
+            _loginWork = loginWork;
 
             Debug.Log("Construct");
         }
@@ -54,9 +52,14 @@ namespace LoginSystem.UI
             
             // async 호출 (비동기 실행)
             var loginParam = new LoginParam { Username = id, Password = pw };
-            var loginExecutor = new WorkExecutor<LoginParam, LoginResult>(new LoginWork(_authService, _userService));
-            var result = await loginExecutor.RunAsync(loginParam);
 
+           // _loginWork.loginExecutor
+
+            //var loginExecutor = new WorkExecutor<LoginParam, LoginResult>(new LoginWork(_authService, _userService));
+            //var result = await loginExecuteWorkAsyncExecutor.RunAsync(loginParam);
+
+           // var result = await loginExecutor.RunAsync(loginParam);
+            var result = await _loginWork.ExecuteWorkAsync(loginParam);
             if (result.IsSuccess)
             {
                 Debug.Log($"{result.ErrorMessage}");

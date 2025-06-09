@@ -12,6 +12,9 @@ public class LoginLifetimeScope : LifetimeScope
         builder.Register<IAuthService, AuthService>(Lifetime.Scoped);
         builder.Register<IUserService, UserService>(Lifetime.Scoped);
 
+        builder.Register<LoginWork>(Lifetime.Transient);
+        builder.Register<LogoutWork>(Lifetime.Transient);
+
         builder.RegisterComponentInHierarchy<LoginPanel>();
         
         Debug.Log("Configure");
