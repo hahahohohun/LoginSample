@@ -10,3 +10,10 @@ public enum LoginErrorCode
     NetworkError,
     Unknown
 }
+
+public enum ServerEnv
+{
+    DEV,
+    QA,
+    LIVE
+}

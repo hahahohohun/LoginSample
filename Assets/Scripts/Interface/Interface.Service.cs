@@ -1,5 +1,12 @@
 using Cysharp.Threading.Tasks;
 
+
+public interface IEnvironmentService
+{
+    ServerEnv Environment { get; }
+    string GetBaseUrl();
+}
+
 namespace LoginSystem.Inerface
 {
     public interface IAuthService
