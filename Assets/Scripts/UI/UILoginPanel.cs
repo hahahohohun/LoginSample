@@ -37,7 +37,7 @@ namespace LoginSystem.UI
         
         LoginWork _loginWork;
         
-        [Inject]
+        [Inject] //mono
         public void Construct(LoginWork loginWork)
         {
             _loginWork = loginWork;
@@ -52,13 +52,7 @@ namespace LoginSystem.UI
             
             // async 호출 (비동기 실행)
             var loginParam = new LoginParam { Username = id, Password = pw };
-
-           // _loginWork.loginExecutor
-
-            //var loginExecutor = new WorkExecutor<LoginParam, LoginResult>(new LoginWork(_authService, _userService));
-            //var result = await loginExecuteWorkAsyncExecutor.RunAsync(loginParam);
-
-           // var result = await loginExecutor.RunAsync(loginParam);
+            
             var result = await _loginWork.ExecuteWorkAsync(loginParam);
             if (result.IsSuccess)
             {
@@ -71,8 +65,6 @@ namespace LoginSystem.UI
                 //todo 실패 UI
             }
         }
-
-
     }
 }
 
