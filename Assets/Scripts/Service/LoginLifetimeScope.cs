@@ -18,9 +18,15 @@ public class LoginLifetimeScope : LifetimeScope
 #else
         env = ServerEnv.LIVE;
 #endif
-        
+        //EnvironmentService 인스턴스를 생성
         var envService = new EnvironmentService(env);
+        
+        //IEnvironmentService 등록 (전체 서비스로 쓰는 용도)
         builder.RegisterInstance<IEnvironmentService>(envService);
+        
+        //enum 값만 따로 등록
+        builder.RegisterInstance(env); 
+
         //.. AuthService
         if (env == ServerEnv.LIVE)
         {
@@ -33,13 +39,13 @@ public class LoginLifetimeScope : LifetimeScope
             builder.Register<IAuthService, MockService>(Lifetime.Scoped);
             builder.Register<IUserService, UserService>(Lifetime.Scoped);
         }
-        
+
         builder.Register<LoginWork>(Lifetime.Transient);
         builder.Register<LogoutWork>(Lifetime.Transient);
 
         //mono
         builder.RegisterComponentInHierarchy<LoginPanel>();
-        //builder.RegisterComponentInHierarchy<UIHUDInfo>();
+        builder.RegisterComponentInHierarchy<UIHUDInfo>();
         
         Debug.Log("Configure");
     }
