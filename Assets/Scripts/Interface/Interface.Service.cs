@@ -7,7 +7,7 @@ public interface IEnvironmentService
     string GetBaseUrl();
 }
 
-namespace LoginSystem.Inerface
+namespace LoginSystem.Interface
 {
     public interface IAuthService
     {

@@ -1,6 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
-using LoginSystem.Inerface;
+using LoginSystem.Interface;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

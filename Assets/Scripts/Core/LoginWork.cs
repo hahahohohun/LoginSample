@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using LoginSystem.Core;
-using LoginSystem.Inerface;
+using LoginSystem.Interface;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoginWork : IWork<LoginSystem.Inerface.LoginParam, LoginResult>
+public class LoginWork : IWork<LoginSystem.Interface.LoginParam, LoginResult>
 {
     private readonly IAuthService _authService;
     private readonly IUserService _userService;

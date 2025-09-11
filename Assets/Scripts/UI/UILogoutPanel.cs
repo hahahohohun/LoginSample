@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using LoginSystem.Core;
-using LoginSystem.Inerface;
+using LoginSystem.Interface;
 using LoginSystem.Service;
 using UnityEngine;
 using UnityEngine.UI;

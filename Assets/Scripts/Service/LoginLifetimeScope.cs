@@ -1,4 +1,4 @@
-using LoginSystem.Inerface;
+using LoginSystem.Interface;
 using LoginSystem.Service;
 using LoginSystem.UI;
 using UnityEngine;
