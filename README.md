@@ -68,8 +68,8 @@ Scripts/
 **로그아웃**
 ![Honeycam 2025-10-29 14-31-42](https://github.com/user-attachments/assets/07c5c9d3-1346-49e6-ab04-1bba1b6a1f08)
 
-다운로드 구글링크
-https://drive.google.com/file/d/1lueWrALwM0zkHWwO_FYcZvB-ZyYBtVQw/view?usp=sharing
+프로젝트 다운로드
+[https://drive.google.com/file/d/1lueWrALwM0zkHWwO_FYcZvB-ZyYBtVQw/view?usp=sharing](https://drive.google.com/file/d/1BucKwFBM9PxQlmjhHx8j5CMJJdyk8lA5/view?usp=sharing)
 
 //UI 사용 : https://kenney.nl/
 
