@@ -34,9 +34,8 @@
 - `LoginUniTest` 에서 로그인 검증 흐름 테스트  
 - Mock 서비스 주입으로 네트워크 독립 테스트 가능
 
----
+```
 ## 주요 클래스 구조
-주요 클래스 구조
 
 Scripts/
 ├── Core/
@@ -57,7 +56,7 @@ Scripts/
 │   └── Enums.cs              // 열거형
 └── Test/
     └── LoginUniTest.cs       // 단위 테스트
-
+```
 ## 구현 GIF
 **서버 선택**
 ![Honeycam 2025-10-29 14-28-41](https://github.com/user-attachments/assets/68e25204-4584-48f2-ae02-f04ba4de92d8)
@@ -69,4 +68,8 @@ Scripts/
 **로그아웃**
 ![Honeycam 2025-10-29 14-31-42](https://github.com/user-attachments/assets/07c5c9d3-1346-49e6-ab04-1bba1b6a1f08)
 
+다운로드 구글링크
+https://drive.google.com/file/d/1lueWrALwM0zkHWwO_FYcZvB-ZyYBtVQw/view?usp=sharing
+
 //UI 사용 : https://kenney.nl/
+
