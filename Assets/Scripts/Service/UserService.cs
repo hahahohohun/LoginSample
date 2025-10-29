@@ -7,7 +7,7 @@ namespace LoginSystem.Service
 {
     public class UserService : IUserService
     {
-        public async UniTask<UserData> LoadUserDataAsync(string token)
+        public async UniTask<UserData> LoadUserDataAsync(string id, string token)
         {
             Debug.Log($"[MockUser] 유저 데이터 로딩 시작 (token: {token})");
 
@@ -18,6 +18,7 @@ namespace LoginSystem.Service
 
             var userData = new UserData
             {
+                ID = id,
                 NickName = "테스트유저",
                 Level = UnityEngine.Random.Range(1, 100)
             };

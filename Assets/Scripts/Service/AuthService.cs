@@ -31,7 +31,6 @@ namespace LoginSystem.Service
         }
     }
     
-    //샘플코드니까 일단 같은 cs파일에 배치
     public class MockService : IAuthService
     {
         private readonly IEnvironmentService _envServiceType;

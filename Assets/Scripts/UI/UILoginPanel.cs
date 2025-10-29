@@ -23,6 +23,9 @@ namespace LoginSystem.UI
         private void Awake()
         {
             loginButton.onClick.AddListener(OnLoginButtonClick);
+            
+            Screen.fullScreenMode = FullScreenMode.Windowed;
+            Screen.SetResolution(1280, 720, false);
         }
 
         private void OnDestroy()
@@ -50,14 +53,31 @@ namespace LoginSystem.UI
             string id = usernameInput.text;
             string pw = passwordInput.text;
             
+            //기본 검증: 
+            //    (규칙은 필요에 맞게 조정해도 됨)
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                ToastMsg.Show("아이디를 입력해 주세요.");   // 큐에 쌓임
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(pw))
+            {
+                ToastMsg.Show("비밀번호를 입력해 주세요.");
+                return;
+            }
+            
             // async 호출 (비동기 실행)
-            var loginParam = new LoginParam { Username = id, Password = pw };
+            var loginParam = new LoginParam { UserID = id, Password = pw };
             
             var result = await _loginWork.ExecuteWorkAsync(loginParam);
             if (result.IsSuccess)
             {
+                ToastMsg.Show("로그인 성공",10);
+                await UniTask.Delay(3000); 
+                
                 Debug.Log($"login succeed {result.ErrorMessage}");
-                await SceneManager.LoadSceneAsync("MainScene").ToUniTask();
+                LoginController.CacheLoginResult(result);
+                await SceneManager.LoadSceneAsync("LogoutScene").ToUniTask();
             }
             else
             {

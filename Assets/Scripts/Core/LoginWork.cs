@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LoginWork : IWork<LoginSystem.Interface.LoginParam, LoginResult>
+public class LoginWork : IWork<LoginParam, LoginResult>
 {
     private readonly IAuthService _authService;
     private readonly IUserService _userService;
@@ -23,22 +23,22 @@ public class LoginWork : IWork<LoginSystem.Interface.LoginParam, LoginResult>
     {
         Debug.Log("로그인 시작");
 
-        string token = await _authService.LoginAsync(param.Username, param.Password);
+        string token = await _authService.LoginAsync(param.UserID, param.Password);
         if (token.IsUnityNull())
         {
-            return new LoginResult(LoginErrorCode.InvalidToken,"Invalid Token" );
+            return new LoginResult(null, LoginErrorCode.InvalidToken, "Invalid Token");
         }
 
-        UserData user = await _userService.LoadUserDataAsync(token);
+        UserData user = await _userService.LoadUserDataAsync(param.UserID, token);
         if (user.IsUnityNull())
         {
-            return new LoginResult(LoginErrorCode.InvalidUserData,"Invalid UserData" );
+            return new LoginResult(null, LoginErrorCode.InvalidUserData,"Invalid UserData" );
         }
         
         await UniTask.Delay(500);
         
         Debug.Log($"로그인 성공 : {user.NickName}, {user.Level}");
-        return _loginResult = new LoginResult(LoginErrorCode.None,"Success" );
+        return _loginResult = new LoginResult(user, LoginErrorCode.None,"Success" );
     }
 }
 

@@ -4,7 +4,9 @@ using Cysharp.Threading.Tasks;
 public interface IEnvironmentService
 {
     ServerEnv Environment { get; }
-    string GetBaseUrl();
+    event System.Action<ServerEnv> Changed;
+    void Set(ServerEnv env);
+    string GetBaseUrl(); //접속 주소 Url
 }
 
 namespace LoginSystem.Interface
@@ -16,11 +18,12 @@ namespace LoginSystem.Interface
     
     public interface IUserService
     {
-        UniTask<UserData> LoadUserDataAsync(string token);
+        UniTask<UserData> LoadUserDataAsync(string id, string token);
     }
 
     public class UserData
     {
+        public string ID;
         public string NickName;
         public int Level;
     }
@@ -38,7 +41,7 @@ namespace LoginSystem.Interface
 
     public struct LoginParam
     {
-        public string Username;
+        public string UserID;
         public string Password;
     }
 }

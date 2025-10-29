@@ -6,6 +6,20 @@ using UnityEngine.SceneManagement;
 
 namespace LoginSystem.Core
 {
+    public static class LoginController
+    {
+        private static LoginResult _loginResult;
+
+        public static void CacheLoginResult(LoginResult loginResult)
+        {
+            _loginResult = loginResult;
+        }
+
+        public static LoginResult GetLoginResult()
+        {
+            return _loginResult;
+        }
+    }
     public class WorkExecutor<TParm, TResult>
     {
         private readonly IWork<TParm, TResult> _work;
@@ -57,8 +71,16 @@ namespace LoginSystem.Core
         public LoginErrorCode ErrorCode { get; private set; }
         public string ErrorMessage { get; private set; }
 
-        public LoginResult(LoginErrorCode errorCode, string errorMessage)
+        private UserData _userData;
+
+        public UserData GetUserData()
         {
+            return _userData;
+        }
+
+        public LoginResult(UserData userData, LoginErrorCode errorCode, string errorMessage)
+        {
+            _userData = userData;
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;
         }
