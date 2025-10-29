@@ -4,7 +4,7 @@
 - 프로젝트명: Unity Login Sample  
 - 개발 환경: Unity 2022.2 / C# / VContainer  
 - 목적: 환경별 로그인 인증 및 단위 테스트 구조를 갖춘 로그인 래퍼 샘플 구현  
-
+- **UniTask**: `LoginWork.ExecuteWorkAsync` 비동기 로그인
 ---
 
 주요 기능
