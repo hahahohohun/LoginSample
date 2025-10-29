@@ -56,5 +56,14 @@ Scripts/
 └─ Test/
 └─ LoginUniTest.cs // 단위 테스트
 
+**- 서버 선택**
+![Honeycam 2025-10-29 14-28-41](https://github.com/user-attachments/assets/68e25204-4584-48f2-ae02-f04ba4de92d8)
+
+- **로그인**
+- 선택한 서버에 주소를 가지고 로그인 시도 합니다.
+![Honeycam 2025-10-29 14-31-17](https://github.com/user-attachments/assets/fe8bf8eb-79ac-47b6-a0ff-b0c0e5d4f776)
+
+**- 로그아웃**
+![Honeycam 2025-10-29 14-31-42](https://github.com/user-attachments/assets/07c5c9d3-1346-49e6-ab04-1bba1b6a1f08)
 
 //UI 사용 : https://kenney.nl/
