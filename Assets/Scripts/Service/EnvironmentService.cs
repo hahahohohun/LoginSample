@@ -12,14 +12,16 @@ namespace LoginSystem.Service
         }
 
         public ServerEnv Environment => _env;
-        public event Action<ServerEnv> Changed;
+        public event Action<ServerEnv> OnChanged;
 
         //ServerEnv환경에 따른 주소 리턴
         public void Set(ServerEnv env)
         {
-            if (_env == env) return;
+            if (_env == env)
+                return;
+
             _env = env;
-            Changed?.Invoke(_env);
+            OnChanged?.Invoke(_env);
         }
 
         public string GetBaseUrl()

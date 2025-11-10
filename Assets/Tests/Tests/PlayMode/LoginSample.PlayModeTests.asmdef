@@ -1,19 +1,24 @@
 {
-  "name": "LoginSample.PlayModeTests",
-  "rootNamespace": "",
-  "references": [
-    "LoginSample.Runtime",
-    "VContainer",
-    "UniTask"
-  ],
-  "optionalUnityReferences": [ "TestAssemblies" ],
-  "includePlatforms": [ "Editor" ],
-  "excludePlatforms": [],
-  "allowUnsafeCode": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+    "name": "LoginSample.PlayModeTests",
+    "rootNamespace": "",
+    "references": [
+        "LoginSample.Runtime",
+        "VContainer",
+        "UniTask",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

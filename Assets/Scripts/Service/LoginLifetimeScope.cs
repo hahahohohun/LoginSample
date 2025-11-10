@@ -1,4 +1,3 @@
-using LoginSystem.Interface;
 using LoginSystem.Service;
 using LoginSystem.UI;
 using UnityEngine;
@@ -7,7 +6,6 @@ using VContainer.Unity;
 
 public class LoginLifetimeScope : LifetimeScope
 {
-    public bool InHouseServer = true;
     protected override void Configure(IContainerBuilder builder)
     {
         var initialEnv = ServerEnv.DEV; // 기본값

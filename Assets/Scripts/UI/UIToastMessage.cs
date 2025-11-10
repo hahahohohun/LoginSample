@@ -2,18 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-#if TMP_PRESENT
-using TMPro;
-#endif
-
 public class UIToastMessage : MonoBehaviour
 {
     [Header("UI")]
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private Text uiText;
-#if TMP_PRESENT
-    [SerializeField] private TextMeshProUGUI tmpText;
-#endif
 
     [Header("효과 설정")]
     [SerializeField] private float fadeInTime = 0.15f;
@@ -37,7 +30,8 @@ public class UIToastMessage : MonoBehaviour
     public void Setup(string message)
     {
         SetText(message);
-        if (_rt != null) _rt.anchoredPosition += spawnOffset;
+        if (_rt != null) 
+            _rt.anchoredPosition += spawnOffset;
         canvasGroup.alpha = 0f;
         gameObject.SetActive(true);
     }
@@ -73,7 +67,8 @@ public class UIToastMessage : MonoBehaviour
 
     private IEnumerator FadeAndRise(float from, float to, float duration, float yOffset)
     {
-        if (_rt == null) yield break;
+        if (_rt == null) 
+            yield break;
 
         float t = 0f;
         Vector2 start = _rt.anchoredPosition + new Vector2(0f, yOffset);
@@ -98,13 +93,7 @@ public class UIToastMessage : MonoBehaviour
 
     private void SetText(string message)
     {
-#if TMP_PRESENT
-        if (tmpText != null)
-        {
-            tmpText.text = message;
-            return;
-        }
-#endif
-        if (uiText != null) uiText.text = message;
+        if (uiText != null)
+            uiText.text = message;
     }
 }

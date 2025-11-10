@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 public interface IEnvironmentService
 {
 	ServerEnv Environment { get; }
-	event System.Action<ServerEnv> Changed;
+	event System.Action<ServerEnv> OnChanged;
 	void Set(ServerEnv env);
 	string GetBaseUrl(); //접속 주소 Url
 }
@@ -41,8 +41,3 @@ public struct LoginParam
 	public string UserID;
 	public string Password;
 }
-namespace LoginSystem.Interface
-{
-	
-}
-

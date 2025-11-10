@@ -1420,7 +1420,6 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  InHouseServer: 1
 --- !u!114 &1321321825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1690,12 +1689,12 @@ GameObject:
   - component: {fileID: 1963385004}
   - component: {fileID: 1963385003}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Button_test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1963385002
 RectTransform:
   m_ObjectHideFlags: 0

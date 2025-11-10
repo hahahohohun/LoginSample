@@ -30,40 +30,62 @@ public class LoginPlayModeTests
 	}
 
 	[UnityTest]
-	public IEnumerator Login_Succeeds_WhenMockReturnsSuccess() => UniTask.ToCoroutine(async () =>
+	public IEnumerator Login_Succeed_Test() => UniTask.ToCoroutine(async () =>
 	{
 		var mgr = new TestLoginManager(_container.Resolve<IAuthService>());
-		bool result = await mgr.Login_Success("test", "pw");
+		bool result = await mgr.Login_Test("test", "pw");
 		Assert.IsTrue(result, "Mock 로그인은 성공해야 합니다.");
 	});
 
-	[UnityTest]
-	public IEnumerator Login_Fails_WhenMockReturnsFailure() => UniTask.ToCoroutine(async () =>
+    //아이디/패스워드 공백
+    [UnityTest]
+	public IEnumerator Login_Failed_Test_IDPW_Empty() => UniTask.ToCoroutine(async () =>
 	{
 		var mgr = new TestLoginManager(_container.Resolve<IAuthService>());
-        bool result = await mgr.Login_Fail("", "");
-		Assert.IsFalse(result, "Mock 로그인은 실패해야 합니다.");
+		//잘못된 파라미터 전달
+        bool result = await mgr.Login_Test(string.Empty, string.Empty);
+
+        Assert.IsFalse(result, "Mock 로그인은 실패해야 합니다.");
 	});
+
+    //아이디 공백
+    [UnityTest]
+    public IEnumerator Login_Failed_ID_Empty() => UniTask.ToCoroutine(async () =>
+    {
+        var mgr = new TestLoginManager(_container.Resolve<IAuthService>());
+        //잘못된 파라미터 전달
+        bool result = await mgr.Login_Test(string.Empty, "123");
+
+        Assert.IsFalse(result, "Mock 로그인은 실패해야 합니다.");
+    });
+
+	//패스워드 공백
+    [UnityTest]
+    public IEnumerator Login_Failed_PW_Empty() => UniTask.ToCoroutine(async () =>
+    {
+        var mgr = new TestLoginManager(_container.Resolve<IAuthService>());
+        //잘못된 파라미터 전달
+        bool result = await mgr.Login_Test("TestID", string.Empty);
+
+        Assert.IsFalse(result, "Mock 로그인은 실패해야 합니다.");
+    });
+
 }
 
 public class TestLoginManager
 {
-	private readonly IAuthService _auth;
+	private readonly IAuthService _authService;
 
-	public TestLoginManager(IAuthService auth) => _auth = auth;
+	public TestLoginManager(IAuthService auth)
+	{
+		_authService = auth;
+	}
 
 	// MockService에서 성공 케이스 호출
-	public async UniTask<bool> Login_Success(string id, string pw)
+	public async UniTask<bool> Login_Test(string username, string password)
 	{
-		var res = await _auth.LoginAsync(id, pw);
+		var res = await _authService.LoginAsync(username, password);
 		return !string.IsNullOrEmpty(res);
 	}
 
-	// 실패 케이스 시뮬레이션
-	public async UniTask<bool> Login_Fail(string id, string pw)
-	{
-		// 실패 상황을 흉내내기 위해 잘못된 파라미터 전달
-		var res = await _auth.LoginAsync("", "");
-		return !string.IsNullOrEmpty(res);
-	}
 }

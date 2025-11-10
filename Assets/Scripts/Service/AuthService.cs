@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using LoginSystem.Interface;
 using LoginSystem.Service;
 using UnityEngine;
  
@@ -24,9 +23,12 @@ namespace LoginSystem.Service
             
             await UniTask.Delay(1000);
 
-            if (username.ToLower() == "fail")
-                return String.Empty;
-            
+            if (username.ToLower() == "fail" || string.IsNullOrEmpty(username))
+                return string.Empty;
+
+            if (string.IsNullOrEmpty(password))
+                return string.Empty;
+
             return "Real_Token";
         }
     }
@@ -46,9 +48,12 @@ namespace LoginSystem.Service
             
             await UniTask.Delay(1000);
 
-            if (username.ToLower() == "fail")
-                return String.Empty;
-            
+            if (username.ToLower() == "fail" || string.IsNullOrEmpty(username))
+                return string.Empty;
+
+            if (string.IsNullOrEmpty(password))
+                return string.Empty;
+
             return "Mock_Token";
         }
     }

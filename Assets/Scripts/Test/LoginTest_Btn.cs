@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 using Cysharp.Threading.Tasks;
-using LoginSystem.Interface;
 using LoginSystem.Service;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -33,10 +32,10 @@ public class LoginTest : MonoBehaviour
 		builder.Register<LoginWork>(Lifetime.Transient);
 		builder.Register<LogoutWork>(Lifetime.Transient);
 
-		builder.Register<TestLoginManager>(Lifetime.Singleton);
+		builder.Register<TestLoginManager_Btn>(Lifetime.Singleton);
 
 		var container = builder.Build();
-		var loginManager = container.Resolve<TestLoginManager>();
+		var loginManager = container.Resolve<TestLoginManager_Btn>();
 
 		bool result = await loginManager.Login_Succed("test", "pw");
 		Assert.IsTrue(result);
@@ -44,24 +43,19 @@ public class LoginTest : MonoBehaviour
 	}
 }
 
-public class TestLoginManager
+public class TestLoginManager_Btn
 {
-    IAuthService _authService;
-    public TestLoginManager(IAuthService authService)
+    private IAuthService _authService;
+    public TestLoginManager_Btn(IAuthService authService)
     {
         _authService = authService;
     }
 
-	
 	public async UniTask<bool> Login_Succed(string username, string password)
     {
-        return true;
-    }
+        var res = await _authService.LoginAsync(username, password);
+        return !string.IsNullOrEmpty(res);
 
-	
-	public async UniTask<bool> Login_Failed(string username, string password)
-	{
-		return false;
-	}
+    }
 }
 

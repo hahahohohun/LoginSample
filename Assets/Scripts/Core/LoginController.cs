@@ -1,8 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
-using LoginSystem.Interface;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace LoginSystem.Core
 {

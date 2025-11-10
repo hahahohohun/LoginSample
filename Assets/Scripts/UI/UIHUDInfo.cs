@@ -48,7 +48,7 @@ public class UIHUDInfo : MonoBehaviour
 
         // 이벤트 연결
         _envDropdown.onValueChanged.AddListener(OnDropdownChanged);
-        _envService.Changed += OnEnvChanged;
+        _envService.OnChanged += OnEnvChanged;
     }
 
     private void OnDestroy()
@@ -57,7 +57,7 @@ public class UIHUDInfo : MonoBehaviour
             _envDropdown.onValueChanged.RemoveListener(OnDropdownChanged);
 
         if (_envService != null)
-            _envService.Changed -= OnEnvChanged;
+            _envService.OnChanged -= OnEnvChanged;
     }
 
     private void SetupDropdownOptions()
