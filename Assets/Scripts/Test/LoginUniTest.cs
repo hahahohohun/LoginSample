@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using Cysharp.Threading.Tasks;
 using LoginSystem.Interface;
 using LoginSystem.Service;
@@ -16,31 +17,51 @@ public class LoginTest : MonoBehaviour
     
     private async UniTask onLogin_Test()
     {
-        var builder = new ContainerBuilder();
-        builder.Register<IAuthService, AuthService>(Lifetime.Singleton);
-        builder.Register<IUserService, UserService>(Lifetime.Singleton);
-        builder.Register<LoginManager>(Lifetime.Singleton);
+		var builder = new ContainerBuilder();
 
-        var container = builder.Build();
-        var loginManager = container.Resolve<LoginManager>();
+		var initialEnv = ServerEnv.DEV; // DEV/QA면 Mock, LIVE면 Real 쓰도록 가정
+		var envService = new EnvironmentService(initialEnv);
+		builder.RegisterInstance<IEnvironmentService>(envService);
+		builder.RegisterInstance(initialEnv); // (선택) enum 필요시
 
-        var result = await loginManager.Login("test", "pw");
+		builder.Register<AuthService>(Lifetime.Singleton);   // LIVE 용
+		builder.Register<MockService>(Lifetime.Singleton);   // DEV/QA 용
 
-        Assert.IsTrue(result);
-    }
+		builder.Register<IAuthService, AuthServiceRouter>(Lifetime.Singleton);
+
+		builder.Register<IUserService, UserService>(Lifetime.Singleton);
+		builder.Register<LoginWork>(Lifetime.Transient);
+		builder.Register<LogoutWork>(Lifetime.Transient);
+
+		builder.Register<TestLoginManager>(Lifetime.Singleton);
+
+		var container = builder.Build();
+		var loginManager = container.Resolve<TestLoginManager>();
+
+		bool result = await loginManager.Login_Succed("test", "pw");
+		Assert.IsTrue(result);
+		Debug.Log($"[LoginTest] Assert passed {result}");
+	}
 }
 
-public class LoginManager
+public class TestLoginManager
 {
     IAuthService _authService;
-    public LoginManager(IAuthService authService)
+    public TestLoginManager(IAuthService authService)
     {
         _authService = authService;
     }
 
-    public async UniTask<bool> Login(string username, string password)
+	
+	public async UniTask<bool> Login_Succed(string username, string password)
     {
-        return false;
+        return true;
     }
+
+	
+	public async UniTask<bool> Login_Failed(string username, string password)
+	{
+		return false;
+	}
 }
 

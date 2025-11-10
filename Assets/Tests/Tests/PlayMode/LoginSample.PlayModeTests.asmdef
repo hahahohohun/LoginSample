@@ -1,0 +1,19 @@
+{
+  "name": "LoginSample.PlayModeTests",
+  "rootNamespace": "",
+  "references": [
+    "LoginSample.Runtime",
+    "VContainer",
+    "UniTask"
+  ],
+  "optionalUnityReferences": [ "TestAssemblies" ],
+  "includePlatforms": [ "Editor" ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

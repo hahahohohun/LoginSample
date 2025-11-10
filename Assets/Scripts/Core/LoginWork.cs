@@ -24,13 +24,13 @@ public class LoginWork : IWork<LoginParam, LoginResult>
         Debug.Log("로그인 시작");
 
         string token = await _authService.LoginAsync(param.UserID, param.Password);
-        if (token.IsUnityNull())
+        if (token == null)
         {
             return new LoginResult(null, LoginErrorCode.InvalidToken, "Invalid Token");
         }
 
         UserData user = await _userService.LoadUserDataAsync(param.UserID, token);
-        if (user.IsUnityNull())
+        if (user == null)
         {
             return new LoginResult(null, LoginErrorCode.InvalidUserData,"Invalid UserData" );
         }

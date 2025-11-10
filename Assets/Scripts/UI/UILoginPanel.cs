@@ -48,8 +48,16 @@ namespace LoginSystem.UI
             Debug.Log("Construct");
         }
 
+        private bool _isLoggingIn = false;
         private async UniTask onLogin()
         {
+            // 중복 클릭 방지
+            if (_isLoggingIn)
+            {
+                ToastMsg.Show("로그인 처리 중입니다.");
+                return;
+            }
+
             string id = usernameInput.text;
             string pw = passwordInput.text;
             
@@ -65,7 +73,8 @@ namespace LoginSystem.UI
                 ToastMsg.Show("비밀번호를 입력해 주세요.");
                 return;
             }
-            
+            _isLoggingIn = true;
+
             // async 호출 (비동기 실행)
             var loginParam = new LoginParam { UserID = id, Password = pw };
             
@@ -81,6 +90,7 @@ namespace LoginSystem.UI
             }
             else
             {
+                _isLoggingIn = false;
                 Debug.Log($"result fail : msg => {result.ErrorMessage}");
                 //todo 실패 UI
             }
