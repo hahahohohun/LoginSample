@@ -65,7 +65,7 @@ Scripts/
 ```
 ## 🧪 단위 테스트 (Unit Tests)
 
-본 프로젝트는 **EditMode**와 **PlayMode** 환경에서 각각 독립적인 단위 테스트를 수행합니다.  
+**EditMode**와 **PlayMode** 환경에서 각각 독립적인 단위 테스트를 수행합니다.  
 테스트 프레임워크는 `NUnit + Unity Test Framework + UniTask` 기반으로 구성되어 있습니다.
 
 ---
