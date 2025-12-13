@@ -3,9 +3,11 @@
 개요
 - 프로젝트명: Unity Login Sample  
 - 개발 환경: Unity 2022.2 / C# / VContainer  
-- 목적: 환경별 로그인 인증 및 단위 테스트 구조를 갖춘 로그인 래퍼 샘플 구현  
+- 목적: 
+1. DI구조를 통해 구현에 의존성을 낮추고 환경(DEV/QA/LIVE)에 변경이 유연하게 가능하도록 구현
+2. 인터페이스를 활용해 의존성과 결합도를 낮추어 유지보수성을 살리는 작업 패턴 
 
-- ## ✨ Features
+- ## Features
 - **ToastMsg**: 코루틴 기반 토스트(최대 3개 동시, 큐 처리, 중앙 정렬)
 - **Environment Switch**: `UIHUDInfo` 드롭다운으로 DEV/QA/LIVE 실시간 전환
 - **VContainer**: `IAuthService` 라우터로 Mock/Real 전환
@@ -18,11 +20,11 @@
 - 개발 / 스테이징 / 운영 서버 전환 지원  
 - `IEnvironmentService` 인터페이스로 서비스 의존성 분리  
 - UI 드롭다운에서 선택 → 자동으로 API Endpoint 반영  
-- PlayerPrefs 기반 환경 저장 기능
+- PlayerPrefs 기반 환경 저장 기능 (편의)
 
 2. 로그인 인증
 - `AuthService`, `AuthServiceRouter` 를 통한 모듈화된 인증 흐름  
-- `LoginController` 와 `LoginWork` 를 Work 패턴 기반으로 분리  
+- `LoginWork` 를 Work 패턴 기반으로 분리  
 - 실패 시 Toast 메시지, 예외 처리 등 UI 피드백 처리
 
 3. 의존성 주입 (VContainer)
@@ -44,7 +46,7 @@
 
 Scripts/
 ├── Core/
-│   ├── LoginController.cs    // 로그인 흐름 제어
+│   ├── LoginController.cs    // 로그인 결과 캐싱용(아직 별다른 기능없음)
 │   └── LoginWork.cs          // 실제 로그인 비즈니스 로직
 ├── Service/
 │   ├── AuthService.cs        // 서버 로그인 처리
@@ -63,14 +65,14 @@ Scripts/
     └── LoginUniTest.cs       // 단위 테스트
 
 ```
-## 🧪 단위 테스트 (Unit Tests)
+## 단위 테스트 (Unit Tests)
 
 **EditMode**와 **PlayMode** 환경에서 각각 독립적인 단위 테스트를 수행합니다.  
 테스트 프레임워크는 `NUnit + Unity Test Framework + UniTask` 기반으로 구성되어 있습니다.
 
 ---
 
-### ✅ EditMode Tests  
+### EditMode Tests  
 > **목적:** 런타임 의존성이 없는 순수 로직 및 DI 구성을 검증합니다.  
 > **테스트 스크린샷:**  
 
@@ -88,7 +90,7 @@ Scripts/
 
 ---
 
-### ▶️ PlayMode Tests  
+### PlayMode Tests  
 > **목적:** 실제 런타임 환경에서 비동기 로그인 로직 및 실패 케이스를 검증합니다.  
 > **테스트 스크린샷:**  
 
@@ -103,12 +105,12 @@ Scripts/
 | **Login_Failed_PW_Empty** | 비밀번호가 비어 있을 경우 로그인 실패 반환 검증 |
 | **Login_Failed_IDPW_Empty** | 아이디·비밀번호 모두 비었을 때 실패 반환 검증 |
 
-> 💡 PlayMode 테스트는 `UniTask` 기반 비동기 흐름을 `UnityTest`로 감싸 실제 런타임 시퀀스를 그대로 재현하며,  
+> PlayMode 테스트는 `UniTask` 기반 비동기 흐름을 `UnityTest`로 감싸 실제 런타임 시퀀스를 그대로 재현하며,  
 > UI·네트워크 모의(Mock) 기반 로직이 올바르게 작동하는지 보장합니다.
 
 ---
 
-### 🧩 테스트 환경 요약
+### 테스트 환경 요약
 - **Framework:** `NUnit`, `UnityEngine.TestTools`, `UniTask`
 - **DI 컨테이너:** `VContainer`
 - **테스트 분류:**  
