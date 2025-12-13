@@ -73,7 +73,7 @@ Scripts/
 ---
 
 ### EditMode Tests  
-> **목적:** 런타임 의존성이 없는 순수 로직 및 DI 구성을 검증합니다.  
+> **목적:** 런타임 의존성이 없는 순수 로직 및 DI 구성을 검증
 > **테스트 스크린샷:**  
 
 <p align="left">
@@ -86,12 +86,12 @@ Scripts/
 | **DefaultEnv_Is_DEV** | `EnvironmentService`의 초기 환경값이 `DEV`로 올바르게 설정되는지 검증 |
 | **Router_Env_Change** | 환경 변경 시 `AuthServiceRouter`가 `MockService` → `AuthService`로 정상 전환되는지 확인 |
 
-> 💡 EditMode 테스트는 실제 실행(Play) 없이 순수 C# 로직만 검증하므로 빠르고 안정적으로 구성 검증이 가능합니다.
+> EditMode 테스트는 실제 실행(Play)용
 
 ---
 
 ### PlayMode Tests  
-> **목적:** 실제 런타임 환경에서 비동기 로그인 로직 및 실패 케이스를 검증합니다.  
+> **목적:** 실제 런타임 환경에서 비동기 로그인 로직 및 실패 케이스를 검증
 > **테스트 스크린샷:**  
 
 <p align="left">
@@ -106,7 +106,7 @@ Scripts/
 | **Login_Failed_IDPW_Empty** | 아이디·비밀번호 모두 비었을 때 실패 반환 검증 |
 
 > PlayMode 테스트는 `UniTask` 기반 비동기 흐름을 `UnityTest`로 감싸 실제 런타임 시퀀스를 그대로 재현하며,  
-> UI·네트워크 모의(Mock) 기반 로직이 올바르게 작동하는지 보장합니다.
+> UI·네트워크 모의(Mock) 기반 로직이 올바르게 작동하는지 보장
 
 ---
 
@@ -117,9 +117,7 @@ Scripts/
   - `EditMode`: 순수 서비스 로직 / DI 구성  
   - `PlayMode`: 비동기 로그인 / Mock 라우팅 / 실패 케이스
 
-> 모든 테스트는 `Test Runner` 창에서 **Run All** 실행 시 전부 통과되며,  
-> CI 환경에서도 동일하게 자동화 테스트로 수행 가능합니다.
-
+> 모든 테스트는 `Test Runner` 창에서 **Run All** 실행으로 전체 테스트 케이스 한번에 체크 가능
 
 ## 구현 GIF
 **서버 선택**
