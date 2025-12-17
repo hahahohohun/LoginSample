@@ -5,27 +5,23 @@
 - 개발 환경: Unity 2022.2 / C# / VContainer  
 - 목적: 
 1. DI구조를 통해 구현에 의존성을 낮추고 환경(DEV/QA/LIVE)에 변경이 유연하게 가능하도록 구현
-2. 인터페이스를 활용해 의존성과 결합도를 낮추어 유지보수성을 살리는 작업 패턴 
-
-- **Environment Switch**: `UIHUDInfo` 드롭다운으로 DEV/QA/LIVE 실시간 전환
-- **VContainer**: `IAuthService` 라우터로 Mock/Real 전환
-- **UniTask**: `LoginWork.ExecuteWorkAsync` 비동기 로그인
----
+2. 인터페이스를 활용해 의존성과 결합도를 낮추어 유지보수성을 살리는 작업 패턴 연습
+3. Unitask와 VContainer 활용 연습
 
 주요 기능
 
-1. 환경 전환 시스템 (Environment Switching)
+1. 환경 전환 시스템
 - 개발 / 스테이징 / 운영 서버 전환 지원  
 - `IEnvironmentService` 인터페이스로 서비스 의존성 분리  
 - UI 드롭다운에서 선택 → 자동으로 API Endpoint 반영  
 - PlayerPrefs 기반 환경 저장 기능 (편의)
 
-2. 로그인 인증
+2. 로그인 인증 (모의)
 - `AuthService`, `AuthServiceRouter` 를 통한 모듈화된 인증 흐름  
 - `LoginWork` 를 Work 패턴 기반으로 분리  
 - 실패 시 Toast 메시지, 예외 처리 등 UI 피드백 처리
 
-3. 의존성 주입 (VContainer)
+3. 의존성 주입
 - `IEnvironmentService`, `IAuthService` 등 모든 서비스는 DI로 관리  
 - 런타임에서 Mock / Real 환경 교체 가능  
 - 테스트, 프로덕션 환경 분리 설계
