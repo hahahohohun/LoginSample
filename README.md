@@ -7,8 +7,6 @@
 1. DI구조를 통해 구현에 의존성을 낮추고 환경(DEV/QA/LIVE)에 변경이 유연하게 가능하도록 구현
 2. 인터페이스를 활용해 의존성과 결합도를 낮추어 유지보수성을 살리는 작업 패턴 
 
-- ## Features
-- **ToastMsg**: 코루틴 기반 토스트(최대 3개 동시, 큐 처리, 중앙 정렬)
 - **Environment Switch**: `UIHUDInfo` 드롭다운으로 DEV/QA/LIVE 실시간 전환
 - **VContainer**: `IAuthService` 라우터로 Mock/Real 전환
 - **UniTask**: `LoginWork.ExecuteWorkAsync` 비동기 로그인
@@ -115,7 +113,7 @@ Scripts/
 - **DI 컨테이너:** `VContainer`
 - **테스트 분류:**  
   - `EditMode`: 순수 서비스 로직 / DI 구성  
-  - `PlayMode`: 비동기 로그인 / Mock 라우팅 / 실패 케이스
+  - `PlayMode`: 비동기 로그인 / Mock/Real 전환 흐름 / 실패 케이스
 
 > 모든 테스트는 `Test Runner` 창에서 **Run All** 실행으로 전체 테스트 케이스 한번에 체크 가능
 
