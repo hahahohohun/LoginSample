@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using LoginSystem.Service;
 using UnityEngine;
@@ -29,6 +30,18 @@ namespace LoginSystem.Service
             if (string.IsNullOrEmpty(password))
                 return string.Empty;
 
+            string token = await UniTask.RunOnThreadPool(() =>
+            {
+                var id = Thread.CurrentThread.ManagedThreadId;
+
+                // 무거운 연산 시뮬레이션
+                long sum = 0;
+                for (int i = 0; i < 50_000_000; i++)
+                    sum += i;
+
+                return $"Real_Token{username}_{id}_{sum}";
+            });
+
             return "Real_Token";
         }
     }
@@ -53,6 +66,20 @@ namespace LoginSystem.Service
 
             if (string.IsNullOrEmpty(password))
                 return string.Empty;
+
+
+            string token = await UniTask.RunOnThreadPool(() =>
+            {
+                var id = Thread.CurrentThread.ManagedThreadId;
+
+                // 무거운 연산 시뮬레이션
+                long sum = 0;
+                for (int i = 0; i < 50_000_000; i++)
+                    sum += i;
+
+                return $"Mock_Token{username}_{id}_{sum}";
+            });
+
 
             return "Mock_Token";
         }
