@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using LoginSystem.Core;
 
 namespace LoginSystem.Service
 {
@@ -23,8 +24,12 @@ namespace LoginSystem.Service
         public IAuthService Service => Impl;
 
         // 아래부터 IAuthService 메서드를 전부 Impl로 위임
-        public UniTask<string> LoginAsync(string id, string pw) => Impl.LoginAsync(id, pw);
-        
+        public UniTask<LoginData> LoginAsync(string id, string pw) => Impl.LoginAsync(id, pw);
+
+        public void Logout()
+        {
+            Impl.Logout();
+        }
     }
 
 }

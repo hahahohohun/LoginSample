@@ -85,7 +85,8 @@ public class TestLoginManager
 	public async UniTask<bool> Login_Test(string username, string password)
 	{
 		var res = await _authService.LoginAsync(username, password);
-		return !string.IsNullOrEmpty(res);
-	}
+		return res.IsSuccess;
+
+    }
 
 }

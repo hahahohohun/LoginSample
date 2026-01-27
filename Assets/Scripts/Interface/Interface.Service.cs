@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using LoginSystem.Core;
 
 public interface IEnvironmentService
 {
@@ -10,12 +11,13 @@ public interface IEnvironmentService
 
 public interface IAuthService
 {
-	UniTask<string> LoginAsync(string username, string password);
+	UniTask<LoginData> LoginAsync(string username, string password);
+	void Logout();
 }
 
 public interface IUserService
 {
-	UniTask<UserData> LoadUserDataAsync(string id, string token);
+	UniTask<UserData> LoadUserDataAsync(string id, LoginData token);
 }
 
 public class UserData
@@ -23,6 +25,7 @@ public class UserData
 	public string ID;
 	public string NickName;
 	public int Level;
+	public string ErrorMessage;
 }
 
 //

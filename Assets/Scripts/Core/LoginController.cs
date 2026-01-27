@@ -65,6 +65,7 @@ namespace LoginSystem.Core
 
     public class LoginResult
     {
+        public AuthState AuthState { get; private set; }
         public bool IsSuccess => ErrorCode == LoginErrorCode.None;
         public LoginErrorCode ErrorCode { get; private set; }
         public string ErrorMessage { get; private set; }
@@ -76,12 +77,21 @@ namespace LoginSystem.Core
             return _userData;
         }
 
-        public LoginResult(UserData userData, LoginErrorCode errorCode, string errorMessage)
+        public LoginResult(UserData userData, AuthState authResultState, LoginErrorCode errorCode, string errorMessage)
         {
             _userData = userData;
+            AuthState = authResultState;
             ErrorCode = errorCode;
             ErrorMessage = errorMessage;
         }
+    }
+
+    public class LoginData
+    {
+        public bool IsSuccess = false;
+        public AuthState AuthResultState = AuthState.Create;
+        public string ErrorMessage;
+        public int ErrorCode;
     }
 }
 

@@ -1,6 +1,6 @@
 {
 	"name": "LoginSample.EditModeTests",
-	"references": ["LoginSample.Runtime", "VContainer", "UniTask"],
+	"references": ["LoginSample.Runtime", "VContainer", "UniTask", "Firebase"],
 	"optionalUnityReferences": [ "TestAssemblies" ],
 	"includePlatforms": [ "Editor" ],
 	  "excludePlatforms": [],

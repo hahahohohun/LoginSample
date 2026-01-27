@@ -6,12 +6,21 @@ using LoginSystem.Core;
 using LoginSystem.Service;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 public class UILogoutPanel : MonoBehaviour
 {
     [SerializeField] private Button loginButton;
     [SerializeField] private Text loginInfoText;
-    
+
+    LogoutWork _logoutWork;
+
+    [Inject] 
+    public void Construct(LogoutWork logoutWork)
+    {
+        _logoutWork = logoutWork;
+    }
+
     private void Awake()
     {
         loginButton.onClick.AddListener(OnLogout);
@@ -34,7 +43,7 @@ public class UILogoutPanel : MonoBehaviour
 
     private async void onLogout()
     {
-        var logoutExecutor = new WorkExecutor(new LogoutWork());
+        var logoutExecutor = new WorkExecutor(_logoutWork);
         await logoutExecutor.RunAsync();
     }
 }
